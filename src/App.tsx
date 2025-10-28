@@ -5,7 +5,7 @@ import { messages } from '../messages/messages';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
 import Product from './pages/Product/Product';
 import Products from './pages/Products/Products';
-import { ROUTES } from './shared/constants/routes';
+import { ROUTES } from './shared/constants';
 
 function App() {
   return (
