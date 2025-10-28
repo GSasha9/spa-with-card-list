@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import * as ReactDom from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
 
 import App from './App';
 
@@ -9,6 +10,8 @@ if (!container) throw new Error('Root container not found');
 
 ReactDom.createRoot(container).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );
