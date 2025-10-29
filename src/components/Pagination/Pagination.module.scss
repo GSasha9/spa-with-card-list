@@ -1,0 +1,15 @@
+@use '../../styles/variables.scss' as *;
+
+.pagination__wrapper {
+  display: flex;
+
+  .pagination__list {
+    display: flex;
+    list-style: none;
+    gap: $spacing-sm;
+
+    .pagination__list_item {
+      cursor: pointer;
+    }
+  }
+}

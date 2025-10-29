@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
+import Pagination from '../../components/Pagination/Pagination';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useGetAllCharactersQuery } from '../../store/rick-and-morty-api/rick-and-morty-api';
 import { deleteCard, selectCard } from '../../store/slices/cards-slice';
@@ -48,6 +49,7 @@ const Products = () => {
           </li>
         ))}
       </ul>
+      <Pagination pages={data?.info.pages ?? 1} />
       <Outlet />
     </section>
   );
