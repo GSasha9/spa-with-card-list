@@ -1,51 +1,74 @@
+import { useState } from 'react';
+
 import styles from './Card.module.scss';
 
 interface CardProps {
+  id: number;
   name: string;
   img: string;
   gender: string;
   species: string;
   status: string;
+  onToggleFavorite: (id: number) => void;
+  onToggleDelete: (id: number) => void;
 }
 
-const Card = ({ name, img, gender, species, status }: CardProps) => {
-  let characterStatusClass: string = '';
+const Card = ({
+  id,
+  name,
+  img,
+  gender,
+  species,
+  status,
+  onToggleFavorite,
+  onToggleDelete,
+}: CardProps) => {
+  const [isClicked, setIsClicked] = useState(false);
 
-  switch (status) {
-    case 'Alive':
-      characterStatusClass = styles.alive;
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event?.preventDefault();
+    setIsClicked(!isClicked);
+    onToggleFavorite(id);
+  };
 
-      break;
-    case 'Dead':
-      characterStatusClass = styles.dead;
+  const handleDelete = (event: React.MouseEvent<HTMLDivElement>) => {
+    event?.preventDefault();
+    onToggleDelete(id);
+  };
 
-      break;
-    case 'unknown':
-      characterStatusClass = styles.unknown;
+  const statusClasses: Record<string, string> = {
+    Alive: styles.alive,
+    Dead: styles.dead,
+    unknown: styles.unknown,
+  };
 
-      break;
-    default:
-      characterStatusClass = '';
-  }
+  const characterStatusClass = statusClasses[status] || '';
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-id={id}>
       <div className={styles.card_img}>
         <img src={img} alt={name}></img>
+        <div className={styles.close} onClick={handleDelete}></div>
       </div>
       <div className={styles.card_text}>
         <h3 className={styles.card_name}>{name}</h3>
-        <p className={styles.card_gender}>
+        <p>
           Gender: <span>{gender}</span>
         </p>
-        <p className={styles.card_species}>
+        <p>
           Species: <span>{species}</span>
         </p>
-        <p className={styles.card_status}>
+        <p>
           Status:
           <span className={characterStatusClass}>{status}</span>
         </p>
       </div>
+      <div
+        className={
+          isClicked ? `${styles.heart} ${styles.active}` : `${styles.heart}`
+        }
+        onClick={handleClick}
+      ></div>
     </div>
   );
 };

@@ -42,11 +42,45 @@
   flex-direction: column;
   border: 1px $accent-color solid;
   align-items: center;
+  position: relative;
+
+  .card_img {
+    position: relative;
+    .close {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 24px;
+      height: 24px;
+      background-image: url('./close_white.svg');
+      background-size: contain;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url('./close_red.svg');
+      }
+    }
+  }
 
   .card_text {
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
     padding: $spacing-sm;
+  }
+
+  .heart {
+    width: 24px;
+    height: 24px;
+    background-image: url('./heart_white.svg');
+    background-size: contain;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+  }
+
+  .active {
+    background-image: url('./heart_red.svg');
   }
 }
