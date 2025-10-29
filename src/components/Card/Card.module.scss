@@ -1,0 +1,52 @@
+@use '../../styles/variables.scss' as *;
+
+.alive {
+  @include status;
+
+  &::after {
+    background-color: #0aec12;
+    animation: blink 5s infinite;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+.dead {
+  @include status;
+
+  &::after {
+    background-color: #000000;
+  }
+}
+
+.unknown {
+  @include status;
+
+  &::after {
+    background-color: #3b3b3b;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px $accent-color solid;
+  align-items: center;
+
+  .card_text {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+  }
+}

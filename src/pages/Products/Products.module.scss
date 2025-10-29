@@ -1,0 +1,9 @@
+@use '../../styles/variables.scss' as *;
+
+.card__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  justify-content: center;
+  list-style: none;
+}

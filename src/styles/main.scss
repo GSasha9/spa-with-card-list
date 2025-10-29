@@ -1,0 +1,29 @@
+@use './variables.scss' as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  font-family: $font;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $accent-color;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+}
