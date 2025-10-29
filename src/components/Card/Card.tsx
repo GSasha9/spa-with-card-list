@@ -9,6 +9,7 @@ interface CardProps {
   gender: string;
   species: string;
   status: string;
+  selected: boolean;
   onToggleFavorite: (id: number) => void;
   onToggleDelete: (id: number) => void;
 }

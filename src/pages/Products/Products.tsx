@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useGetAllCharactersQuery } from '../../store/rick-and-morty-api/rick-and-morty-api';
 import { deleteCard, selectCard } from '../../store/slices/cards-slice';
 
@@ -12,6 +12,13 @@ const Products = () => {
   const dispatch = useAppDispatch();
 
   console.log(data);
+
+  const deletedCards = useAppSelector((state) => state.cards.deletedCards);
+  const favoriteCards = useAppSelector((state) => state.cards.selectedCards);
+
+  const visibleCards = data?.results.filter(
+    (card) => !deletedCards.includes(card.id)
+  );
 
   const handleToggleFavorite = (id: number) => {
     dispatch(selectCard(Number(id)));
@@ -25,7 +32,7 @@ const Products = () => {
     <section className="container">
       <h1>Products</h1>
       <ul className={styles.card__list}>
-        {data?.results.map((el) => (
+        {visibleCards?.map((el) => (
           <li key={el.id}>
             <Card
               id={el.id}
@@ -34,6 +41,7 @@ const Products = () => {
               gender={el.gender}
               species={el.species}
               status={el.status}
+              selected={favoriteCards.includes(el.id)}
               onToggleFavorite={handleToggleFavorite}
               onToggleDelete={handleToggleDelete}
             />
