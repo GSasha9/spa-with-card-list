@@ -4,11 +4,11 @@ import {
   type PayloadAction,
 } from '@reduxjs/toolkit';
 
-import { BASE_URL } from '../../shared/constants';
+import { BASE_URL, ERROR_MESSAGES } from '../../shared/constants';
 import type { Character } from '../../shared/interfaces';
 
 interface CardsState {
-  selectedCards: Character[];
+  selectedCards: number[];
   cards: Character[];
   isLoading: boolean;
   error: string | null;
@@ -34,7 +34,7 @@ export const fetchAllCards = createAsyncThunk<
       const response = await fetch(nextUrl);
 
       if (!response.ok) {
-        throw new Error('Error response');
+        throw new Error(ERROR_MESSAGES.responseErr);
       }
 
       const data = await response.json();
@@ -47,7 +47,7 @@ export const fetchAllCards = createAsyncThunk<
   } catch (error: unknown) {
     if (error instanceof Error) return rejectWithValue(error.message);
 
-    return rejectWithValue('Unknown Error');
+    return rejectWithValue(ERROR_MESSAGES.unknownErr);
   }
 });
 
@@ -55,9 +55,9 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    selectCard: (state, action: PayloadAction<Character>) => {
+    selectCard: (state, action: PayloadAction<number>) => {
       const alreadySelected = state.selectedCards.find(
-        (card) => card.id === action.payload.id
+        (card) => card === action.payload
       );
 
       if (!alreadySelected) {
@@ -84,7 +84,7 @@ export const cardsSlice = createSlice({
       })
       .addCase(fetchAllCards.rejected, (state) => {
         state.isLoading = false;
-        state.error = 'Something went wrong';
+        state.error = ERROR_MESSAGES.smthWentWrong;
       });
   },
 });

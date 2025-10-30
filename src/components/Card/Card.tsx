@@ -21,10 +21,11 @@ const Card = ({
   gender,
   species,
   status,
+  selected,
   onToggleFavorite,
   onToggleDelete,
 }: CardProps) => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(selected);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event?.preventDefault();

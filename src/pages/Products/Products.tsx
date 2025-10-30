@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
-//import Pagination from '../../components/Pagination/Pagination';
+import Pagination from '../../components/Pagination/Pagination';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   deleteCard,
@@ -13,21 +13,29 @@ import {
 import styles from './Products.module.scss';
 
 const Products = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useAppDispatch();
   const { cards, isLoading } = useAppSelector((state) => state.cards);
+  const favoriteCards = useAppSelector((state) => state.cards.selectedCards);
 
   useEffect(() => {
     dispatch(fetchAllCards());
   }, [dispatch]);
 
-  const favoriteCards = useAppSelector((state) => state.cards.selectedCards);
+  const ITEMS_PER_PAGE = 20;
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const visibleCards = cards.slice(startIndex, endIndex);
+
+  const totalPages = Math.floor(cards.length / ITEMS_PER_PAGE);
 
   const handleToggleFavorite = (id: number) => {
     const card = cards.find((el) => el.id === id);
 
     if (!card) return;
 
-    dispatch(selectCard(card));
+    dispatch(selectCard(card.id));
   };
 
   const handleToggleDelete = (id: number) => {
@@ -38,13 +46,17 @@ const Products = () => {
     dispatch(deleteCard(card));
   };
 
+  const handlePageNumberClick = (number: number) => {
+    setCurrentPage(number);
+  };
+
   return (
     <section className="container">
       <h1>Products</h1>
       <ul className={styles.card__list}>
         {isLoading
           ? 'Loading'
-          : cards?.map((el) => (
+          : visibleCards?.map((el) => (
               <li key={el.id}>
                 <Card
                   id={el.id}
@@ -53,14 +65,18 @@ const Products = () => {
                   gender={el.gender}
                   species={el.species}
                   status={el.status}
-                  selected={favoriteCards.includes(el)}
+                  selected={favoriteCards.includes(el.id)}
                   onToggleFavorite={handleToggleFavorite}
                   onToggleDelete={handleToggleDelete}
                 />
               </li>
             ))}
       </ul>
-      {/* <Pagination pages={data?.info.pages ?? 1} /> */}
+      <Pagination
+        pages={totalPages}
+        pageCallback={handlePageNumberClick}
+        currentPage={currentPage}
+      />
       <Outlet />
     </section>
   );
