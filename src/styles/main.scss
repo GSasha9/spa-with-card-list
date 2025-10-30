@@ -28,3 +28,20 @@ h4 {
   padding: $spacing-sm $spacing-lg;
   width: 100%;
 }
+
+.navigation {
+  flex-direction: row;
+  color: $accent-color;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  gap: $spacing-xxl;
+
+  a {
+    text-decoration: none;
+    color: $accent-color;
+
+    &:hover {
+      color: black;
+    }
+  }
+}

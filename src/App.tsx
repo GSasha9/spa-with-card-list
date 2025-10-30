@@ -9,8 +9,8 @@ import { ROUTES } from './shared/constants';
 
 function App() {
   return (
-    <>
-      <nav>
+    <div className="container">
+      <nav className="container navigation">
         <Link to={ROUTES.products}>{messages.en.nav.products}</Link>
         <Link to={ROUTES.createProduct}>{messages.en.nav.createProduct}</Link>
       </nav>
@@ -24,7 +24,7 @@ function App() {
         </Route>
         <Route path={ROUTES.createProduct} element={<CreateProduct />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
