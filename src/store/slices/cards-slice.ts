@@ -1,21 +1,63 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
+
+import { BASE_URL } from '../../shared/constants';
+import type { Character } from '../../shared/interfaces';
+
 interface CardsState {
-  selectedCards: number[];
-  deletedCards: number[];
+  selectedCards: Character[];
+  cards: Character[];
+  isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: CardsState = {
   selectedCards: [],
-  deletedCards: [],
+  cards: [],
+  isLoading: false,
+  error: null,
 };
+
+export const fetchAllCards = createAsyncThunk<
+  Character[],
+  undefined,
+  { rejectValue: string }
+>('cards/fetchAll', async (_, { rejectWithValue }) => {
+  try {
+    let allCards: Character[] = [];
+    let nextUrl: string | null = `${BASE_URL}/character`;
+
+    while (nextUrl) {
+      const response = await fetch(nextUrl);
+
+      if (!response.ok) {
+        throw new Error('Error response');
+      }
+
+      const data = await response.json();
+
+      allCards = [...allCards, ...data.results];
+      nextUrl = data.info.next;
+    }
+
+    return allCards;
+  } catch (error: unknown) {
+    if (error instanceof Error) return rejectWithValue(error.message);
+
+    return rejectWithValue('Unknown Error');
+  }
+});
 
 export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    selectCard: (state, action: PayloadAction<number>) => {
+    selectCard: (state, action: PayloadAction<Character>) => {
       const alreadySelected = state.selectedCards.find(
-        (card) => card === action.payload
+        (card) => card.id === action.payload.id
       );
 
       if (!alreadySelected) {
@@ -26,9 +68,24 @@ export const cardsSlice = createSlice({
         );
       }
     },
-    deleteCard: (state, action: PayloadAction<number>) => {
-      state.deletedCards.push(action.payload);
+    deleteCard: (state, action: PayloadAction<Character>) => {
+      state.cards = state.cards.filter((card) => card.id !== action.payload.id);
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllCards.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllCards.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.cards = action.payload;
+      })
+      .addCase(fetchAllCards.rejected, (state) => {
+        state.isLoading = false;
+        state.error = 'Something went wrong';
+      });
   },
 });
 
