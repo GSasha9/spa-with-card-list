@@ -1,0 +1,65 @@
+@use '../../styles/variables.scss' as *;
+
+.detailed_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-xxl;
+  width: 80%;
+  border: 1px $accent-color solid;
+  padding: $spacing-xl;
+
+  .detailed_card_description {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: $spacing-md;
+
+    @include respond-m {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .detailed_card_img {
+      width: 400px;
+      border-radius: 50%;
+
+      @include respond-m {
+        width: 220px;
+      }
+    }
+
+    .detailed_card_text {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xl;
+      color: $accent-color;
+      font-size: $font-size-lg;
+
+      @include respond-m {
+        align-items: center;
+      }
+
+      .detailed_card_text_p {
+        display: flex;
+        gap: $spacing-md;
+        flex-wrap: wrap;
+
+        @include respond-m {
+          justify-content: center;
+        }
+
+        & > span:last-child {
+          color: black;
+          text-wrap: wrap;
+
+          @include respond-m {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

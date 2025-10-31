@@ -33,3 +33,11 @@ $spacing-xxl: 48px;
     vertical-align: middle;
   }
 }
+
+$breakpoint-m: 1000px;
+
+@mixin respond-m {
+  @media screen and (max-width: $breakpoint-m) {
+    @content;
+  }
+}

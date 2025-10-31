@@ -6,7 +6,7 @@ import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import Select from '../../components/Select/Select';
-import { ROUTES, SELECT_OPTIONS } from '../../shared/constants';
+import { SELECT_OPTIONS } from '../../shared/constants';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   deleteCard,
@@ -70,7 +70,7 @@ const Products = () => {
   };
 
   const handleCardClick = (id: number) => {
-    navigate(`${ROUTES.products}/${id}`);
+    navigate(`${id}`);
   };
 
   const handlePageNumberClick = (number: number) => {
