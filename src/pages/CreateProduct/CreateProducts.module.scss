@@ -1,0 +1,58 @@
+@use '../../styles/variables.scss' as *;
+
+fieldset {
+  border: 1px $accent-color solid;
+  width: 35%;
+}
+
+.error {
+  color: $error-color;
+  font-size: $font-size-xs;
+  text-wrap: wrap;
+  position: absolute;
+  bottom: 0px;
+  width: 70%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+
+  .field_wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 60px;
+  }
+
+  .hidden_input {
+    display: none;
+  }
+
+  .custom_button {
+    background-color: $button-color;
+    color: $accent-color;
+    padding: $spacing-sm $spacing-xl;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      background-color: $accent-color-secondary;
+    }
+  }
+
+  .file_name {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
