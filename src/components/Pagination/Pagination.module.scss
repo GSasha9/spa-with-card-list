@@ -1,0 +1,24 @@
+@use '../../styles/variables.scss' as *;
+
+.active {
+  color: $accent-color-secondary;
+  text-decoration: underline;
+}
+
+.pagination__wrapper {
+  padding: $spacing-xl 0px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  justify-content: space-between;
+
+  .pagination__list {
+    display: flex;
+    list-style: none;
+    gap: $spacing-xl;
+
+    .pagination__list_item {
+      cursor: pointer;
+    }
+  }
+}

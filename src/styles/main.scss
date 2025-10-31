@@ -1,0 +1,58 @@
+@use './variables.scss' as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  font-family: $font;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $accent-color;
+  padding: 0px;
+  margin: 0px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-lg;
+  width: 100%;
+  max-width: 1440px;
+  justify-self: center;
+}
+
+.navigation {
+  flex-direction: row;
+  color: $accent-color;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  gap: $spacing-xxl;
+
+  a {
+    text-decoration: none;
+    color: $accent-color;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.info {
+  text-align: center;
+  padding: $spacing-lg;
+  font-size: $font-size-lg;
+  color: $accent-color;
+}

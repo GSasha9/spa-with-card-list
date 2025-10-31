@@ -4,5 +4,7 @@ export const messages = {
       products: 'Products',
       createProduct: 'Create product',
     },
+    loading: 'Loading...',
+    noResults: 'No results found',
   },
 };

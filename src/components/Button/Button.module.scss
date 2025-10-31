@@ -1,0 +1,24 @@
+@use '../../styles/variables.scss' as *;
+
+.button {
+  background-color: $button-color;
+  color: $accent-color;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  padding: $spacing-sm $spacing-xl;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    border: 3px solid $button-color;
+  }
+
+  &:active {
+    background-color: $accent-color-secondary;
+  }
+
+  &:disabled {
+    background-color: grey;
+    pointer-events: none;
+  }
+}

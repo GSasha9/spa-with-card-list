@@ -1,0 +1,16 @@
+@use '../../styles/variables.scss' as *;
+
+.controls_panel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: $spacing-md 0px;
+}
+
+.card__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xxl;
+  justify-content: center;
+  list-style: none;
+}

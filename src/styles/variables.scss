@@ -1,0 +1,35 @@
+$background-color: #76a273;
+$accent-color: #f4e486;
+$accent-color-secondary: #ff5e00;
+$button-color: #2c3d2b;
+
+$font: 'Helvetica', sans-serif;
+
+$font-size-lg: 24px;
+
+$font-weight-bold: 600;
+
+$spacing-xxs: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+@mixin status {
+  position: relative;
+  color: #000;
+  margin-left: 3px;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background-color: #535353;
+    vertical-align: middle;
+  }
+}
