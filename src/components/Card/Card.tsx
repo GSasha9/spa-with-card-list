@@ -28,13 +28,13 @@ const Card = ({
   const [isClicked, setIsClicked] = useState(selected);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event?.preventDefault();
+    event?.stopPropagation();
     setIsClicked(!isClicked);
     onToggleFavorite(id);
   };
 
   const handleDelete = (event: React.MouseEvent<HTMLDivElement>) => {
-    event?.preventDefault();
+    event?.stopPropagation();
     onToggleDelete(id);
   };
 

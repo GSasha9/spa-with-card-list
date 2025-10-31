@@ -45,10 +45,15 @@
   position: relative;
   height: 412px;
   max-width: 300px;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px $accent-color-secondary solid;
+  }
 
   .card_img {
     position: relative;
-    width: 300px;
+    width: 100%;
     height: 300px;
 
     img {
