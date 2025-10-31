@@ -1,0 +1,12 @@
+@use '../../styles/variables.scss' as *;
+
+.input {
+    width: 83%;
+    height: $spacing-xxl;
+    outline: none;
+    padding-left: $spacing-sm;
+
+    &::placeholder {
+        padding-left: $spacing-sm;
+    }
+}

@@ -19,9 +19,8 @@ function App() {
           path={ROUTES.default}
           element={<Navigate to={ROUTES.products} replace />}
         />
-        <Route path={ROUTES.products} element={<Products />}>
-          <Route path=":id" element={<Product />} />
-        </Route>
+        <Route path={ROUTES.products} element={<Products />} />
+        <Route path={`${ROUTES.products}/:id`} element={<Product />} />
         <Route path={ROUTES.createProduct} element={<CreateProduct />} />
       </Routes>
     </div>

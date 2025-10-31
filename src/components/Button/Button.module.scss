@@ -16,4 +16,9 @@
   &:active {
     background-color: $accent-color-secondary;
   }
+
+  &:disabled {
+    background-color: grey;
+    pointer-events: none;
+  }
 }
