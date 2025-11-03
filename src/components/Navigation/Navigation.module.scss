@@ -1,0 +1,22 @@
+@use '../../styles/variables.scss' as *;
+
+.navigation {
+  display: flex;
+  color: $accent-color;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  gap: $spacing-xxl;
+
+  a {
+    text-decoration: none;
+    color: $accent-color;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .active {
+    color: $accent-color-secondary;
+  }
+}

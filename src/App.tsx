@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
-import { messages } from '../messages/messages';
+import Navigation from './components/Navigation/Navigation';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
 import Product from './pages/Product/Product';
 import Products from './pages/Products/Products';
@@ -10,10 +9,7 @@ import { ROUTES } from './shared/constants';
 function App() {
   return (
     <div className="container">
-      <nav className="container navigation">
-        <Link to={ROUTES.products}>{messages.en.nav.products}</Link>
-        <Link to={ROUTES.createProduct}>{messages.en.nav.createProduct}</Link>
-      </nav>
+      <Navigation />
       <Routes>
         <Route
           path={ROUTES.default}

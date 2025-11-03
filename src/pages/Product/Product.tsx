@@ -43,29 +43,32 @@ const Product = () => {
             </div>
             <div className={styles.detailed_card_text}>
               <p className={styles.detailed_card_text_p}>
-                <span>Gender:</span> <span>{data.gender}</span>
+                <span>{messages.en.gender}</span> <span>{data.gender}</span>
               </p>
               <p className={styles.detailed_card_text_p}>
-                <span>Species:</span> <span>{data.species}</span>
+                <span>{messages.en.species}</span> <span>{data.species}</span>
               </p>
               <p className={styles.detailed_card_text_p}>
-                <span>Status:</span>
+                <span>{messages.en.status}</span>
                 <span>{data.status}</span>
               </p>
               <p className={styles.detailed_card_text_p}>
-                <span>Location:</span>
+                <span>{messages.en.location}</span>
                 <span>{data.location.name}</span>
               </p>
               <p className={styles.detailed_card_text_p}>
-                <span>Last known location:</span>
+                <span>{messages.en.lastKnown}</span>
                 <span>{data.origin.name}</span>
               </p>
             </div>
           </div>
+          <Link to=".." relative="path">
+            {messages.en.backToProducts}
+          </Link>
         </div>
       ) : (
         <Link to=".." relative="path">
-          Go home
+          {messages.en.backToProducts}
         </Link>
       )}
     </div>

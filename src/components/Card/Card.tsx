@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { messages } from '../../../messages/messages';
+
 import styles from './Card.module.scss';
 
 interface CardProps {
@@ -55,13 +57,13 @@ const Card = ({
       <div className={styles.card_text}>
         <h3 className={styles.card_name}>{name}</h3>
         <p>
-          Gender: <span>{gender}</span>
+          {messages.en.gender} <span>{gender}</span>
         </p>
         <p>
-          Species: <span>{species}</span>
+          {messages.en.species} <span>{species}</span>
         </p>
         <p>
-          Status:
+          {messages.en.status}
           <span className={characterStatusClass}>{status}</span>
         </p>
       </div>

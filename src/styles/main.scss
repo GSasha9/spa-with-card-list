@@ -33,23 +33,6 @@ h4 {
   justify-self: center;
 }
 
-.navigation {
-  flex-direction: row;
-  color: $accent-color;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
-  gap: $spacing-xxl;
-
-  a {
-    text-decoration: none;
-    color: $accent-color;
-
-    &:hover {
-      color: black;
-    }
-  }
-}
-
 .info {
   text-align: center;
   padding: $spacing-lg;
