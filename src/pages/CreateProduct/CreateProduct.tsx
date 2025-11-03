@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 
+import { messages } from '../../../messages/messages';
 import Button from '../../components/Button/Button';
 import { FORM_ERROR_MESSAGES } from '../../shared/constants';
 import { validatedFormSchema } from '../../shared/utils/validatedFormSchema';
@@ -124,7 +125,7 @@ const CreateProduct = () => {
 
   return (
     <fieldset className={styles.fieldset}>
-      <h2>Create Product</h2>
+      <h2>{messages.en.nav.createProduct}</h2>
       <form className={styles.form} onSubmit={(e) => onSubmit(e)} ref={formRef}>
         <div className={styles.field_wrapper}>
           <label htmlFor="name">Name</label>

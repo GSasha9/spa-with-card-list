@@ -6,5 +6,11 @@ export const messages = {
     },
     loading: 'Loading...',
     noResults: 'No results found',
+    gender: 'Gender:',
+    species: 'Species:',
+    status: 'Status:',
+    location: 'Location:',
+    lastKnown: 'Last known location:',
+    backToProducts: 'Back to products',
   },
 };
