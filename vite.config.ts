@@ -3,7 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '',
+  base: '/spa-with-card-list/',
   plugins: [react()],
   resolve: {
     alias: {

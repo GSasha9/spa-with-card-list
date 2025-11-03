@@ -8,8 +8,6 @@ import styles from './Navigation.module.scss';
 const Navigation = () => {
   const location = useLocation();
 
-  console.log(location.pathname.slice(1));
-
   return (
     <div className="container">
       {' '}

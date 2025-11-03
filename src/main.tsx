@@ -16,7 +16,7 @@ if (!container) throw new Error('Root container not found');
 ReactDom.createRoot(container).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/spa-with-card-list">
         <App />
       </BrowserRouter>
     </Provider>
