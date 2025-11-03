@@ -5,11 +5,15 @@ import {
 } from '@reduxjs/toolkit';
 
 import { BASE_URL, ERROR_MESSAGES } from '../../shared/constants';
-import type { Character } from '../../shared/interfaces';
+import type {
+  Character,
+  CreateProductFormValues,
+} from '../../shared/interfaces';
 
 interface CardsState {
   selectedCards: number[];
   cards: Character[];
+  createdCard: CreateProductFormValues[];
   isLoading: boolean;
   error: string | null;
 }
@@ -17,6 +21,7 @@ interface CardsState {
 const initialState: CardsState = {
   selectedCards: [],
   cards: [],
+  createdCard: [],
   isLoading: false,
   error: null,
 };
@@ -71,6 +76,9 @@ export const cardsSlice = createSlice({
     deleteCard: (state, action: PayloadAction<Character>) => {
       state.cards = state.cards.filter((card) => card.id !== action.payload.id);
     },
+    createCard: (state, action: PayloadAction<CreateProductFormValues>) => {
+      state.createdCard.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,6 +97,6 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { selectCard, deleteCard } = cardsSlice.actions;
+export const { selectCard, deleteCard, createCard } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

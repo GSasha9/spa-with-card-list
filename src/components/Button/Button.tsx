@@ -2,13 +2,19 @@ import styles from './Button.module.scss';
 
 interface ButtonProps {
   text: string;
-  callback: () => void;
+  callback?: () => void;
   disabled?: boolean;
+  type?: 'submit' | 'button';
 }
 
-const Button = ({ text, callback, disabled }: ButtonProps) => {
+const Button = ({ text, callback, disabled, type = 'submit' }: ButtonProps) => {
   return (
-    <button className={styles.button} onClick={callback} disabled={disabled}>
+    <button
+      type={type}
+      className={styles.button}
+      onClick={callback}
+      disabled={disabled}
+    >
       {text}
     </button>
   );

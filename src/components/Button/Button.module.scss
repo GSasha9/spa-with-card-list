@@ -20,5 +20,6 @@
   &:disabled {
     background-color: grey;
     pointer-events: none;
+    font-weight: $font-weight-bold;
   }
 }

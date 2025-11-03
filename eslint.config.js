@@ -80,6 +80,10 @@ export default tseslint.config(
           next: 'export',
         },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
     },
     settings: {
       react: {
