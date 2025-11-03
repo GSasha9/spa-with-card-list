@@ -1,14 +1,24 @@
 import { Link, useParams } from 'react-router';
 
 import { messages } from '../../../messages/messages';
+import { useAppSelector } from '../../store/hooks';
 import { useGetCharacterByIdQuery } from '../../store/rick-and-morty-api/rick-and-morty-api';
 
 import styles from './Product.module.scss';
 
 const Product = () => {
   const { id } = useParams();
+  const createdCards = useAppSelector((state) => state.cards.createdCard);
 
-  const { data, isLoading } = useGetCharacterByIdQuery(Number(id) | 0);
+  const createdCard = createdCards.find((el) => el.id === Number(id));
+
+  const { data: apiData, isLoading: isApiLoading } = useGetCharacterByIdQuery(
+    createdCard ? undefined : Number(id),
+    { skip: !!createdCard }
+  );
+
+  const data = createdCard || apiData;
+  const isLoading = createdCard ? false : isApiLoading;
 
   if (isLoading) {
     return (

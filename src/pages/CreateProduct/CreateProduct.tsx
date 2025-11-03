@@ -40,10 +40,14 @@ const CreateProduct = () => {
       gender: String(formData.get('gender') || INITIAL_FORM_DATA.gender),
       species: String(formData.get('species') || INITIAL_FORM_DATA.species),
       status: String(formData.get('status') || INITIAL_FORM_DATA.status),
-      location: String(formData.get('location') || INITIAL_FORM_DATA.location),
-      lastLocation: String(
-        formData.get('lastLocation') || INITIAL_FORM_DATA.lastLocation
-      ),
+      location: {
+        name: String(formData.get('location') || INITIAL_FORM_DATA.location),
+      },
+      origin: {
+        name: String(
+          formData.get('lastLocation') || INITIAL_FORM_DATA.lastLocation
+        ),
+      },
       image: fileRef.current,
     };
 

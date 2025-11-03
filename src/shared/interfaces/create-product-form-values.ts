@@ -4,7 +4,11 @@ export interface CreateProductFormValues {
   gender: string;
   species: string;
   status: string;
-  location: string;
-  lastLocation: string;
+  location: {
+    name: string;
+  };
+  origin: {
+    name: string;
+  };
   image: string;
 }
