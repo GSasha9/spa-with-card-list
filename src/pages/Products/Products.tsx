@@ -24,6 +24,12 @@ const Products = () => {
   const { cards, isLoading } = useAppSelector((state) => state.cards);
   const favoriteCards = useAppSelector((state) => state.cards.selectedCards);
   const navigate = useNavigate();
+  const createdCards = useAppSelector((state) => state.cards.createdCard);
+
+  const allCards = useMemo(
+    () => [...createdCards, ...cards],
+    [cards, createdCards]
+  );
 
   useEffect(() => {
     if (cards.length === 0) {
@@ -32,7 +38,7 @@ const Products = () => {
   }, [dispatch, cards.length]);
 
   const filteredCards = useMemo(() => {
-    return cards.filter((el) => {
+    return allCards.filter((el) => {
       const matchesSearch = el.name
         .toLowerCase()
         .includes(searchValue.toLowerCase());
@@ -43,7 +49,7 @@ const Products = () => {
 
       return matchesSearch && matchesFilter;
     });
-  }, [cards, searchValue, select, favoriteCards]);
+  }, [allCards, searchValue, select, favoriteCards]);
 
   const ITEMS_PER_PAGE = 20;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -54,7 +60,7 @@ const Products = () => {
   const totalPages = Math.ceil(filteredCards.length / ITEMS_PER_PAGE);
 
   const handleToggleFavorite = (id: number) => {
-    const card = cards.find((el) => el.id === id);
+    const card = allCards.find((el) => el.id === id);
 
     if (!card) return;
 
@@ -62,7 +68,7 @@ const Products = () => {
   };
 
   const handleToggleDelete = (id: number) => {
-    const card = cards.find((el) => el.id === id);
+    const card = allCards.find((el) => el.id === id);
 
     if (!card) return;
 

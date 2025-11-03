@@ -9,7 +9,7 @@ import { createCard } from '../../store/slices/cards-slice';
 import styles from './CreateProducts.module.scss';
 
 const INITIAL_FORM_DATA = {
-  id: '',
+  id: 0,
   name: '',
   gender: '',
   species: '',
@@ -35,7 +35,7 @@ const CreateProduct = () => {
     const formData = new FormData(formRef.current);
 
     const data = {
-      id: `${crypto.randomUUID()}c`,
+      id: Number(Date.now()),
       name: String(formData.get('name') || INITIAL_FORM_DATA.name),
       gender: String(formData.get('gender') || INITIAL_FORM_DATA.gender),
       species: String(formData.get('species') || INITIAL_FORM_DATA.species),
@@ -44,7 +44,7 @@ const CreateProduct = () => {
       lastLocation: String(
         formData.get('lastLocation') || INITIAL_FORM_DATA.lastLocation
       ),
-      file: fileRef.current,
+      image: fileRef.current,
     };
 
     const result = validatedFormSchema.safeParse(data);
