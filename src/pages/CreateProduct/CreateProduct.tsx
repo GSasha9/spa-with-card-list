@@ -25,6 +25,7 @@ const CreateProduct = () => {
   const dispatch = useAppDispatch();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [fileName, setFileName] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,12 +63,27 @@ const CreateProduct = () => {
     }
 
     dispatch(createCard(result.data));
+    resetForm();
+    setIsSuccess(true);
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (errors.file) {
+      setErrors((prev) => {
+        const { file, ...rest } = prev;
+
+        return rest;
+      });
+    }
+
     const file = e.target.files?.[0];
 
-    if (!file) return;
+    if (!file) {
+      setFileName('');
+      fileRef.current = '';
+
+      return;
+    }
 
     setFileName(file.name);
 
@@ -79,19 +95,47 @@ const CreateProduct = () => {
     reader.readAsDataURL(file);
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setIsSuccess(false);
+    const { name } = e.target;
+
+    if (errors[name]) {
+      setErrors((prev) => {
+        const { [name]: _, ...rest } = prev;
+
+        return rest;
+      });
+    }
+  };
+
+  const resetForm = () => {
+    formRef.current?.reset();
+    fileRef.current = '';
+    setFileName('');
+    setErrors({});
+    setIsSuccess(false);
+  };
+
   return (
-    <fieldset>
+    <fieldset className={styles.fieldset}>
       <h2>Create Product</h2>
       <form className={styles.form} onSubmit={(e) => onSubmit(e)} ref={formRef}>
         <div className={styles.field_wrapper}>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            onChange={handleInputChange}
+          />
           {errors.name && <p className={styles.error}>{errors.name}</p>}
         </div>
 
         <div className={styles.field_wrapper}>
           <label htmlFor="gender">Gender</label>
-          <select id="gender" name="gender">
+          <select id="gender" name="gender" onChange={handleInputChange}>
             <option value="">Select gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -106,7 +150,7 @@ const CreateProduct = () => {
 
         <div className={styles.field_wrapper}>
           <label htmlFor="status">Status</label>
-          <select id="status" name="status">
+          <select id="status" name="status" onChange={handleInputChange}>
             <option value="">Select status</option>
             <option value="Alive">Alive</option>
             <option value="Dead">Dead</option>
@@ -121,19 +165,34 @@ const CreateProduct = () => {
 
         <div className={styles.field_wrapper}>
           <label htmlFor="species">Species</label>
-          <input type="text" id="species" name="species" />
+          <input
+            type="text"
+            id="species"
+            name="species"
+            onChange={handleInputChange}
+          />
           {errors.species && <p className={styles.error}>{errors.species}</p>}
         </div>
 
         <div className={styles.field_wrapper}>
           <label htmlFor="location">Location</label>
-          <input type="text" id="location" name="location" />
+          <input
+            type="text"
+            id="location"
+            name="location"
+            onChange={handleInputChange}
+          />
           {errors.location && <p className={styles.error}>{errors.location}</p>}
         </div>
 
         <div className={styles.field_wrapper}>
           <label htmlFor="lastLocation">Last known location</label>
-          <input type="text" id="lastLocation" name="lastLocation" />
+          <input
+            type="text"
+            id="lastLocation"
+            name="lastLocation"
+            onChange={handleInputChange}
+          />
           {errors.lastLocation && (
             <p className={styles.error}>{errors.lastLocation}</p>
           )}
@@ -159,16 +218,10 @@ const CreateProduct = () => {
 
         <div className={styles.buttons}>
           <Button text="Add" type="submit" />
-          <Button
-            text="Cancel"
-            type="button"
-            callback={() => {
-              formRef.current?.reset();
-              fileRef.current = '';
-              setFileName('');
-              setErrors({});
-            }}
-          />
+          <Button text="Cancel" type="button" callback={resetForm} />
+        </div>
+        <div className={styles.form_message}>
+          {isSuccess ? `Card added successfully` : ''}
         </div>
       </form>
     </fieldset>

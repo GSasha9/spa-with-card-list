@@ -1,8 +1,9 @@
 @use '../../styles/variables.scss' as *;
 
-fieldset {
+.fieldset {
   border: 1px $accent-color solid;
   width: 35%;
+  padding: $spacing-lg;
 }
 
 .error {
@@ -18,7 +19,6 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
-  padding: $spacing-lg;
 
   .field_wrapper {
     display: flex;
@@ -54,5 +54,11 @@ fieldset {
     display: flex;
     width: 100%;
     justify-content: space-between;
+  }
+
+  .form_message {
+    color: $accent-color;
+    height: 20px;
+    text-align: center;
   }
 }
