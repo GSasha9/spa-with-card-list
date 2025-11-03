@@ -73,8 +73,14 @@ export const cardsSlice = createSlice({
         );
       }
     },
-    deleteCard: (state, action: PayloadAction<Character>) => {
+    deleteCard: (
+      state,
+      action: PayloadAction<Character | CreateProductFormValues>
+    ) => {
       state.cards = state.cards.filter((card) => card.id !== action.payload.id);
+      state.createdCard = state.createdCard.filter(
+        (card) => card.id !== action.payload.id
+      );
     },
     createCard: (state, action: PayloadAction<CreateProductFormValues>) => {
       state.createdCard.push(action.payload);

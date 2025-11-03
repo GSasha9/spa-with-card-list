@@ -1,10 +1,10 @@
 export interface CreateProductFormValues {
-  id: string;
+  id: number;
   name: string;
   gender: string;
   species: string;
   status: string;
   location: string;
   lastLocation: string;
-  file: string;
+  image: string;
 }

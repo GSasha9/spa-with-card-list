@@ -3,7 +3,7 @@ import * as z from 'zod';
 import { FORM_ERROR_MESSAGES } from '../constants';
 
 export const validatedFormSchema = z.object({
-  id: z.string().min(1, FORM_ERROR_MESSAGES.name.required),
+  id: z.number(),
   name: z
     .string()
     .min(1, FORM_ERROR_MESSAGES.name.required)
@@ -14,7 +14,7 @@ export const validatedFormSchema = z.object({
   species: z.string().min(1, FORM_ERROR_MESSAGES.name.required),
   location: z.string().min(1, FORM_ERROR_MESSAGES.name.required),
   lastLocation: z.string().min(1, FORM_ERROR_MESSAGES.name.required),
-  file: z
+  image: z
     .string()
     .refine((val) => val.length > 0, FORM_ERROR_MESSAGES.file.required)
     .refine(
